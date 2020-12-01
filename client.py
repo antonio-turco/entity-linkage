@@ -17,7 +17,7 @@ siteB = [
 ]
 
 sites = [siteA, siteB]
-leaves = []
+leaves_sites = []
 
 #estraggo termini foglia per ogni link
 for site in sites:
@@ -29,7 +29,7 @@ for site in sites:
 		labeled_leaves = wrapper.assoc_key_to_leaves(page[0], extracted_leaves)
 		site_leaves.append(labeled_leaves)
 		log("leaves extracted")
-	leaves.append(site_leaves)
+	leaves_sites.append(site_leaves)
 
 '''
 for leave in leaves:
@@ -37,7 +37,8 @@ for leave in leaves:
 		print(text[0])
 '''
 
-
+for leaves_site in leaves_sites:
+	wrapper.diff(leaves_site)
 
 #estraggo le differenze negli stessi siti
 

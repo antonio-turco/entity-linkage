@@ -1,20 +1,44 @@
-import requests
-from lxml import html
+from wrapper import Wrapper 
+import itertools
+
+def log(message):
+	print("[DEBUG]: " + message)
+
+wrapper = Wrapper()
+
+siteA = [
+	(0, "https://www.imdb.com/title/tt6723592/?ref_=fn_al_tt_1"),
+	(1,"https://www.imdb.com/title/tt0209144/?ref_=nv_sr_srsg_0"),
+]
+
+siteB = [
+	(2, "https://www.rottentomatoes.com/m/memento"),
+	(3, "https://www.rottentomatoes.com/m/tenet"),
+]
+
+sites = [siteA, siteB]
+leaves = []
+
+#estraggo termini foglia per ogni link
+for site in sites:
+	site_leaves = []
+	for page in site:
+		log("extracting from: " + page[1])
+		extracted_leaves = wrapper.get_all_leaves(page[1])
+		#ad ogni termine ci associo la pagina sorgente
+		labeled_leaves = wrapper.assoc_key_to_leaves(page[0], extracted_leaves)
+		site_leaves.append(labeled_leaves)
+		log("leaves extracted")
+	leaves.append(site_leaves)
+
+'''
+for leave in leaves:
+	for text in leave:
+		print(text[0])
+'''
 
 
-#page = requests.get("https://www.amazon.it/deal/4d61aab4?showVariations=true&smid=A11IL2PNWYJU7H&pf_rd_r=WCTQ011G7N6HDA4SWJMD&pf_rd_p=ea5bf4a9-15d4-4a5e-bb3a-0866177c4312")
-#tree = html.fromstring(page.text)
 
-#all_leaves = tree.xpath("//body//*[text()[not(normalize-space()='')]][not(self::script or self::style or self::meta or self::noscript)]/text()")
+#estraggo le differenze negli stessi siti
 
-#print(all_leaves)
-
-def get_all_leaves(url):
-	page = requests.get(url)
-	dom_tree = html.fromstring(page.text)
-	all_leaves = dom_tree.xpath("//body//*[text()[not(normalize-space()='')]][not(self::script or self::style or self::meta or self::noscript)]/text()")
-	return all_leaves
-
-print(
-	get_all_leaves("https://www.amazon.it/deal/4d61aab4?showVariations=true&smid=A11IL2PNWYJU7H&pf_rd_r=WCTQ011G7N6HDA4SWJMD&pf_rd_p=ea5bf4a9-15d4-4a5e-bb3a-0866177c4312")
-)
+#associo le pagine inter-sito in base alla similiarità

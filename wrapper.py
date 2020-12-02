@@ -11,9 +11,6 @@ class Wrapper:
 		all_leaves = dom_tree.xpath("//body//*[text()[not(normalize-space()='')]][not(self::script or self::style or self::meta or self::noscript)]/text()")
 		return all_leaves
 
-	def assoc_key_to_leaves(self, key, leaves):
-		return list(map(lambda leaf: (key, leaf), leaves))
-
 	def remove_label_from_leaves(self, leaves):
 		return list(map(lambda key_leaf: key_leaf[1], leaves))
 

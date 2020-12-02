@@ -9,11 +9,13 @@ wrapper = Wrapper()
 siteA = [
 	(0, "john-wall-rotoworld.html"),
 	(1, "danilo-gallinari-rotoworld.html"),
+	(2, "luguentz-dort-rotoworld.html"),
 ]
 
 siteB = [
-	(2, "danilo-gallinari-nba.html"),
-	(3, "john-wall-nba.html"),
+	(3, "danilo-gallinari-nba.html"),
+	(4, "john-wall-nba.html"),
+	(5, "luguentz-dort-nba.html"),
 ]
 
 sites = [siteA, siteB]

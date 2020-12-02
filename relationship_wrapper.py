@@ -30,21 +30,16 @@ class RelationshipWrapper:
 
 	def get_associations(self):
 		unique_leaves = self.__get_unique_leaves()
-		site1 = unique_leaves[0]
-		site2 = unique_leaves[1]
+		site1, site2 = unique_leaves[0], unique_leaves[1]
 		
 		associations = []
 
 		for label1, page1 in site1:
-			max_sim = 0
-			max_label1 = 0
-			max_label2 = 0
+			max_sim, max_label1, max_label2 = 0, 0, 0
 			for label2, page2 in site2:
 				sim = self.__similiarity(page1, page2)
 				if sim > max_sim:
-					max_sim = sim
-					max_label1 = label1
-					max_label2 = label2
+					max_sim, max_label1, max_label2 = sim, label1, label2
 			associations.append( (max_label1, max_label2) )
 
 		return associations

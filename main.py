@@ -1,11 +1,7 @@
 from wrapper import Wrapper 
-from wrapper_pipeline import RelationshipWrapper
+from relationship_wrapper import RelationshipWrapper
 import itertools
 
-def log(message):
-	print("[DEBUG]: " + message)
-
-wrapper = Wrapper()
 siteA = [
 	(0, "dataset/john-wall-rotoworld.html"),
 	(1, "dataset/luguentz-dort-rotoworld.html"),
@@ -19,5 +15,8 @@ siteB = [
 ]
 
 sites = [siteA, siteB]
+
+
+wrapper = Wrapper()
 relationship_wrapper = RelationshipWrapper(sites, wrapper)
 print(relationship_wrapper.get_associations())

@@ -4,7 +4,7 @@ from lxml import html
 class Wrapper:
 
 	def get_all_leaves(self, path):
-		file = open(path, "r")
+		file = open(path, "r", encoding="utf8")
 		page = file.read()
 		file.close()
 		dom_tree = html.fromstring(page)
